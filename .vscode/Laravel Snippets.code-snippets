@@ -1,0 +1,26 @@
+{
+	"Create column type for Laravel Migration Table": {
+		"prefix": "larav-mg-col",
+		"body": [
+			"\\$table->${1|id,unsignedBigInteger,integer,bigInteger,boolean,dateTime,string,text|}('${2:column_name}');\n"
+		],
+		"description": "Create column type for Laravel Migration Table"
+	},
+	"Create foreign key for Laravel Migration Table": {
+		"prefix": "larav-mg-fk",
+		"body": [
+			"\\$table->foreign('${1:this_column}')->references('${2:referenced_column}')->on('${3:referenced_table}');\n"
+		],
+		"description": "Create foreign key for Laravel Migration Table"
+	},
+	"Create a new route": {
+		"prefix": "larav-route",
+		"body": [
+			"Route::${1|get,post,put,patch,delete,options|}('${2:url}', '${3:Controller}@${4:Action}')->name('${5:route_name}');\n"
+		],
+		"description": "Create new route"
+	},
+}
+
+
+
