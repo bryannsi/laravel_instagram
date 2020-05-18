@@ -10,13 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
+    /**home
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email','username', 'password',
+        'name', 'email', 'username', 'password',
     ];
 
     /**
@@ -37,9 +37,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(
+            function ($user) {
+                $user->profile()->create([
+                    'title' => $user->username,
+                ]);
+            }
+        );
+    }
+
     public function profile()
     {
-        return $this->hasOne(Profile::class)->orderBy('created_at','DESC');
+        return $this->hasOne(Profile::class)->orderBy('created_at', 'DESC');
     }
 
     public function posts()
