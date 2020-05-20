@@ -13,18 +13,17 @@ class ProfilesController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param $user
      * @return Renderable
      */
-    public function index($user)
+    public function index(User $user)
     {
         //Catch the username from model and send to the view
-        $user = User::findOrFail($user);
-        return view(
-            'profiles.index',
-            [
-                'user' => $user,
-            ]
-        );
+        //$user = User::findOrFail($user);
+        $authUser = auth()->user();
+        $followed = $authUser ? $authUser->following->contains($user->id) : false;
+        dd($followed);
+        return view('profiles.index',compact('user','$followed'));
     }
 
     public function edit(User $user)
