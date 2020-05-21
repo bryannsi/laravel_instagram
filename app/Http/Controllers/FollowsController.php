@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class FollowsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Save on many to many table
      * @param User $user User to follow, (not authenticated).
@@ -15,7 +20,7 @@ class FollowsController extends Controller
      */
     public function store(User $user)
     {
-        return auth()->user()->following()->toggle($user->profile());
+        return auth()->user()->following()->toggle($user->profile);
     }
 }
 
